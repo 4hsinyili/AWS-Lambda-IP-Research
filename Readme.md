@@ -14,7 +14,8 @@
 ## 測試方式：
 在我的 ec2 / django server 上架設了一個 view ，只要透過網址連到這個 view 的請求，其 IP 都會被 print 出來。接著利用 AWS Lambda 撰寫簡單的 request ，再以 stepfunction 同時或接連執行該 Lambda 。最後複製 print 結果並整理。
 
-我在 step function 中使用了三層 parallel ，依序開啟 8, 12, 16 次 Lambda，每層間隔 0.5 秒。執行了兩次這個 function ，兩次相隔約 15 分鐘
+我在 step function 中使用了三層 parallel ，依序開啟 8, 12, 16 次 Lambda，每層間隔 0.5 秒。執行了兩次這個 function ，兩次相隔約 15 分鐘， step function 架構如下：
+![](stepfunctions_graph.png)
 
 第一次我得到了 10 個唯一（unique）的 ip，第二次我得到了 12 個唯一的 ip，兩次加起來我得到 22 個唯一的 ip。
 
